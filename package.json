@@ -1,0 +1,27 @@
+{
+  "name": "ts_study",
+  "version": "1.0.0",
+  "description": "一个学习ts的仓库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "build:w": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqh17/ts-study.git"
+  },
+  "keywords": [
+    "ts"
+  ],
+  "author": "17",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sqh17/ts-study/issues"
+  },
+  "homepage": "https://github.com/sqh17/ts-study#readme",
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
