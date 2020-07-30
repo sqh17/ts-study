@@ -23,6 +23,11 @@ let sentence: string = "Hello, my name is " + user + ".\n\n" +
 const a:void = undefined;
 const b:null = null;
 const c:number = undefined;
+const d:string = null;
+const e:boolean = null;
+const f:boolean = undefined;
+let u: void;
+// let g: number = u;
 let bool_1:boolean = false;
 const symbol_1:symbol = Symbol(2);
 const symbol_2:symbol = Symbol(2);
@@ -55,3 +60,18 @@ let a_1 :number | undefined | null = 2
 let obj :object = {
   name:'peter'
 }
+
+let any_1:any;
+any_1 = 4;
+any_1 = '4'
+any_1 = [1,2,3]
+let any_2;
+any_2 = 4;
+let anyThing: any = 'Tom';
+anyThing.setName('Jerry');
+anyThing.setName('Jerry').sayHello();
+anyThing.myName.setFirstName('Cat');
+
+let never_1:never;
+// never_1 = 123;
+never_1 = (()=>{ throw new Error('exception')})();
