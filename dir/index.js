@@ -7,6 +7,8 @@ var createdByNewBoolean = Boolean(1);
 var decLiteral = 6;
 var hexLiteral = 0xf00d;
 var binaryLiteral = 10;
+var binaryLiteral_1 = 1;
+var binaryLiteral_2 = 668;
 var octalLiteral = 484;
 var num_2 = undefined;
 var book = '深入浅出 Typescript';
@@ -17,6 +19,7 @@ var sentence = "Hello, my name is " + user + ".\n\n" +
 var a = undefined;
 var b = null;
 var c = undefined;
+var bool_1 = false;
 var symbol_1 = Symbol(2);
 var symbol_2 = Symbol(2);
 var arr = ['a', 'b', 'c', 'd'];
@@ -36,6 +39,11 @@ var enum_1 = Enum.B;
 function foo() {
     console.log('this is peter');
 }
+function foo1() {
+    console.log('今天天气不错');
+}
+var fo_1 = null;
+var a_1 = 2;
 var obj = {
     name: 'peter'
 };

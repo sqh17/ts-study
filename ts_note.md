@@ -24,13 +24,3 @@ mac 在实行`tsc --init`时，报`bash: tsc: command not found`
 5. 运行`source .bash_profile`
 6. 再运行`tsc --init`，出现`message TS6071: Successfully created a tsconfig.json file.` 代表成功
 
-* 原始数据类型
-number,string,boolean,null,undefined,symbol
-
-  let isDone: boolean = false;
-  let decLiteral:number = 6;
-  const book: string = '深入浅出 Typescript';
-  const a:void = undefined;
-
-
-

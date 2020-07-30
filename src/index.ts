@@ -9,6 +9,8 @@ let createdByNewBoolean: boolean = Boolean(1);
 let decLiteral:number = 6;
 const hexLiteral: number = 0xf00d;
 const binaryLiteral: number = 0b1010;
+const binaryLiteral_1:number = 0b0001;
+const binaryLiteral_2:number = 0o1234;
 const octalLiteral: number = 0o744;
 const num_2 :undefined = undefined;
 
@@ -20,8 +22,8 @@ let sentence: string = "Hello, my name is " + user + ".\n\n" +
     "I'll be " + (age + 1) + " years old next month.";
 const a:void = undefined;
 const b:null = null;
-const c:undefined = undefined;
-
+const c:number = undefined;
+let bool_1:boolean = false;
 const symbol_1:symbol = Symbol(2);
 const symbol_2:symbol = Symbol(2);
 
@@ -45,7 +47,11 @@ let enum_1: Enum = Enum.B;
 function foo():void{
   console.log('this is peter')
 }
-
+function foo1():void{
+  console.log('今天天气不错')
+}
+let fo_1:void = null;
+let a_1 :number | undefined | null = 2
 let obj :object = {
   name:'peter'
 }
