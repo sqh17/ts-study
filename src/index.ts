@@ -68,10 +68,60 @@ any_1 = [1,2,3]
 let any_2;
 any_2 = 4;
 let anyThing: any = 'Tom';
-anyThing.setName('Jerry');
-anyThing.setName('Jerry').sayHello();
-anyThing.myName.setFirstName('Cat');
+// anyThing.setName('Jerry');
+// anyThing.setName('Jerry').sayHello();
+// anyThing.myName.setFirstName('Cat');
 
 let never_1:never;
 // never_1 = 123;
-never_1 = (()=>{ throw new Error('exception')})();
+// never_1 = (()=>{ throw new Error('exception')})();
+
+let unknown_1:unknown ;
+unknown_1= {
+  myName:'peter'
+};
+// console.log(unknown_1.myName);
+let any_3:any = 'tom'
+// console.log(any_3.myName);
+
+const tuple: [string, number] = ['a', 1];
+tuple.push(2); // ok
+// console.log(tuple); // ["a", 1, 2] -> 正常打印出来
+// console.log(tuple[2])
+
+let obj_1:object;
+obj_1 = {
+  name:'peter'
+};
+obj_1 = [1,2,3]
+// obj_1 = '1';
+
+let x: never;
+		let y: number;
+
+// 运行错误，数字类型不能转为 never 类型
+// x = 123;
+
+// 运行正确，never 类型可以赋值给 never类型
+// x = (()=>{ throw new Error('exception')})();
+
+// 运行正确，never 类型可以赋值给 数字类型
+// y = (()=>{ throw new Error('exception')})();
+
+
+// enum Direction {
+//   Up = 1,
+//   Down = 3,
+//   Left = 5,
+//   Right = 6
+// }
+// console.log(Direction['Down']) // 3
+// console.log(Direction[3]) // Down
+enum Direction {
+  Up = 'a',
+  Down = 'b',
+  Left = 'c',
+  Right = 'd'
+}
+console.log(Direction['Down']) // b
+console.log(Direction.Down) // Down
