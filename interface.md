@@ -84,5 +84,49 @@ __只读的约束存在于第一次给对象赋值的时候，而不是第一次
 
 #### 任意类型
 
-在js中，对象就有无限声明赋值的特性，ts也可以设置接口的任意类型来无限声明赋值。
+在js中，对象就有无限声明赋值的特性，ts也可以设置接口的任意类型来无限声明赋值。使用 [propName: string]或者[propName: number] 定义了任意属性取 string或number 类型的值。
+
+  interface Person_1{
+    id:number
+    name:string,
+    [propName:string]:string,
+  } //报错 类型“number”的属性“id”不能赋给字符串索引类型“string”
+  let Lily:Person_1 = {
+    id:12345,
+    name:'Lily',
+    age:18,
+  } // 报错，不能将类型“number”分配给类型“string”。
+
+一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集，就拿上面的例子说，一旦声明了任意类型为string，那么就不能定义属性number和boolean了，同样的道理，在应用的时候，未知的属性也必须是string类型。  
+解决这个办法就将任意类型的类型设置为any或者unknown，或者采用联合类型。除非有万不得已的情况，不建议采用此方法
+
+  interface Person_1{
+    id:number
+    name:string,
+    isMale:boolean,
+    [propName:string]:unknown,
+  }
+  let Lily:Person_1 = {
+    id:12345,
+    name:'Lily',
+    isMale:false,
+    age:18,
+    like:'dance'
+  }
+
+TypeScript支持两种索引签名：字符串和数字。 可以同时使用`两种类型的索引`， 简称：可索引类型。 
+  
+可以描述那些能够“通过索引得到”的类型，比如a[10]或ageMap["daniel"]。 可索引类型具有一个 索引签名，它描述了对象索引的类型，还有相应的索引返回值类型。  
+都是说明属性是字符串还是数字，一般对象中字符串居多，数组数字居多，在数组中，可以通过数字索引类型获取对应的值。
+，但是数字索引的返回值必须是字符串索引返回值类型的子类型。 这是因为当使用 number来索引时，JavaScript会将它转换成string然后再去索引对象。 也就是说用 100（一个number）去索引等同于使用"100"（一个string）去索引，因此两者需要保持一致。
+
+  interface StringArray {
+    [index: number]: string;
+  }
+
+  let myArray: StringArray;
+  myArray = ["Bob", "Fred"];
+
+  let myStr: string = myArray[0];
+
 

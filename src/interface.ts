@@ -51,5 +51,18 @@ interface Person_1{
   [propName:string]:unknown,
 }
 let Lily:Person_1 = {
-  id:12345
+  id:12345,
+  name:'Lily',
+  isMale:false,
+  age:18,
+  like:'dance'
 }
+interface StringArray {
+  [index: number]: string;
+}
+
+let myArray: StringArray;
+myArray = ["Bob", "Fred"];
+
+let myStr: string = myArray[0];
+console.log(myStr)
