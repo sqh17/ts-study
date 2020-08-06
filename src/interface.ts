@@ -66,3 +66,31 @@ myArray = ["Bob", "Fred"];
 
 let myStr: string = myArray[0];
 console.log(myStr)
+
+interface Foo {
+  (str:string,num:number):void
+}
+
+let foo_1:Foo = (str1:string,num1:number)=>{
+  console.log(`${str1},${num1}`)
+}
+
+interface Person{
+  id:number,
+  name:string,
+  isMale:boolean
+}
+interface Male extends Person {
+  isMale:boolean,
+  hobby:string,
+  eat:(val:string)=>string
+}
+let Got:Male = {
+  isMale:true,
+  id:1111,
+  name:'Got',
+  hobby:'basketball',
+  eat:(apple)=>{
+    return apple
+  }
+}

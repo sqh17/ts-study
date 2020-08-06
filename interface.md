@@ -143,3 +143,29 @@ __都是说明属性是字符串还是数字，一般对象中字符串居多，
     return key + value;
   }
   console.log(md1('张三', '初一一班'));
+
+#### 继承接口
+
+所谓的继承，就是一个接口能够拥有另一个接口的属性和类型,并且在拥有的基础上再添加自己的属性和类型。  
+继承不可以覆盖父接口的属性和类型
+
+  interface Person{
+    id:number,
+    name:string,
+    isMale:boolean
+  }
+  interface Male extends Person {
+    isMale:boolean,
+    hobby:string,
+    eat:(val:string)=>string
+  }
+  let Got:Male = {
+    isMale:true,
+    id:1111,
+    name:'Got',
+    hobby:'basketball',
+    eat:(apple)=>{
+      return apple
+    }
+  }
+
