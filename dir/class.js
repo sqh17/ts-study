@@ -85,5 +85,41 @@ var Class_Animal = (function () {
     return Class_Animal;
 }());
 var cat = new Class_Animal();
-cat.name = 'catt';
+var Class_Animal1 = (function () {
+    function Class_Animal1(name) {
+        if (name === void 0) { name = 'peter'; }
+        this.name = name;
+    }
+    return Class_Animal1;
+}());
+var class_peter = new Class_Animal1();
+console.log(class_peter);
+var Class_Animal2 = (function () {
+    function Class_Animal2(name) {
+        if (name === void 0) { name = 'tom'; }
+        this.name = name;
+    }
+    return Class_Animal2;
+}());
+var class_tom = new Class_Animal2();
+console.log(class_tom);
+var Class_Animal3 = (function () {
+    function Class_Animal3(myname) {
+        this.myname = myname;
+    }
+    Class_Animal3.isAnimal = function (a) {
+        return a instanceof Animal;
+    };
+    Class_Animal3.myname = 'tome';
+    return Class_Animal3;
+}());
+var Son_Animal3 = (function (_super) {
+    __extends(Son_Animal3, _super);
+    function Son_Animal3(name) {
+        return _super.call(this, name) || this;
+    }
+    return Son_Animal3;
+}(Class_Animal3));
+var class_a = new Animal('Jack');
+Class_Animal3.isAnimal(class_a);
 //# sourceMappingURL=class.js.map

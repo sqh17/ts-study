@@ -33,3 +33,22 @@ declare class Class_Animal {
     constructor(type?: string);
 }
 declare let cat: Class_Animal;
+declare class Class_Animal1 {
+    private name;
+    constructor(name?: string);
+}
+declare let class_peter: Class_Animal1;
+declare class Class_Animal2 {
+    private name;
+    constructor(name?: string);
+}
+declare let class_tom: Class_Animal2;
+declare class Class_Animal3 {
+    static myname: string;
+    constructor(myname: string);
+    static isAnimal(a: any): boolean;
+}
+declare class Son_Animal3 extends Class_Animal3 {
+    constructor(name: string);
+}
+declare let class_a: Animal;

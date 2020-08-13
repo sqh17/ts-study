@@ -69,4 +69,38 @@ class Class_Animal {
   }
 }
 let cat = new Class_Animal();
-cat.name = 'catt'
+// cat.name = 'catt'
+
+class Class_Animal1{
+  constructor(private name:string = 'peter'){}
+}
+let class_peter = new Class_Animal1();
+console.log(class_peter)
+class Class_Animal2{
+  private name:string;
+  constructor(name:string = 'tom'){
+    this.name = name
+  }
+}
+let class_tom = new Class_Animal2();
+console.log(class_tom)
+
+
+class Class_Animal3 {
+  static myname:string = 'tome'
+  constructor(myname:string){
+    this.myname = myname
+  }
+  static isAnimal(a:any) {
+    return a instanceof Animal;
+  }
+}
+class Son_Animal3 extends Class_Animal3{
+  constructor(name:string){
+    super(name)
+  }
+}
+let class_a = new Animal('Jack');
+// class_a.isAnimal(class_a); // Property 'isAnimal' does not exist on type 'Animal'.ts(2339)
+Class_Animal3.isAnimal(class_a); // true
+// console.log(Class_Animal3.myname) // tome

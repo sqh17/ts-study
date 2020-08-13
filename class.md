@@ -188,10 +188,57 @@ ts中有三种访问修饰符：public，private，protected
   let cat = new Class_Animal();
   cat.name = 'catt' // Cannot assign to 'name' because it is a read-only property.ts(2540)
 
+__注意如果 readonly 和其他访问修饰符同时存在的话，需要写在其后面。__
+
+参数属性
+修饰符和readonly还可以使用在构造函数参数中，等同于类中定义该属性同时给该属性赋值，使代码更简洁。通俗的说，把声明和赋值合并为一处
+
+  class Class_Animal1{
+    constructor(private name:string = 'peter'){}
+  }
+  // 等价于
+  class Class_Animal2{
+    private name:string;
+    constructor(name:string = 'tom'){
+      this.name = name
+    }
+  }
+
 #### 存取器
+TypeScript支持通过getters/setters来截取对对象成员的访问。 它能帮助你有效的控制对对象成员的访问。
+
+  class Animal {
+    constructor(name) {
+      this.name = name;
+    }
+    get name() {
+      return 'Jack';
+    }
+    set name(value) {
+      console.log('setter: ' + value);
+    }
+  }
+
+  let a = new Animal('Kitty'); // setter: Kitty
+  a.name = 'Tom'; // setter: Tom
+  console.log(a.name); // Jack
 
 #### 静态属性
+使用 static 修饰符修饰的属性和方法称为静态属性和静态方法，它们不需要实例化，而是直接通过类来调用
+  
+  class Class_Animal3 {
+    static myname:string = 'tome'
+    static isAnimal(a:any) {
+      return a instanceof Animal;
+    }
+  }
 
+  let class_a = new Animal('Jack');
+  class_a.isAnimal(class_a); // Property 'isAnimal' does not exist on type 'Animal'.ts(2339)
+  Class_Animal3.isAnimal(class_a); // true
+  console.log(Class_Animal3.myname) // tome
+
+  
 #### 抽象类
 
 #### 类与接口
