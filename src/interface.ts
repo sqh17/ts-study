@@ -15,22 +15,22 @@ let tom:Person = {
   isMale:false,
   // age:20
 }
-interface Animal{
-  type:string,
-  color?:string
-}
+// interface Animal{
+//   type:string,
+//   color?:string
+// }
 
-let tiger:Animal = {
-  type:'cat',
-  color:'yellow'
-}
-let lion:Animal = {
-  type:'dog'
-}
-let shark:Animal = {
-  type:'fish',
-  // isBig:true
-}
+// let tiger:Animal = {
+//   type:'cat',
+//   color:'yellow'
+// }
+// let lion:Animal = {
+//   type:'dog'
+// }
+// let shark:Animal = {
+//   type:'fish',
+//   // isBig:true
+// }
 
 interface Flower{
   readonly name:string,

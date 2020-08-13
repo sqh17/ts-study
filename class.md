@@ -52,7 +52,141 @@ ts的实现方式
 
 #### 继承
 
+js中class 使用 extends 关键字实现继承，子类中使用 super 关键字来调用父类的构造函数和方法。
+在ts中，和js的操作方式一样
+
+  class Animal {
+    name:string;
+    constructor(thename:string){
+      this.name = thename;
+    }
+    move(distance:number):void{
+      console.log(`${this.name} 移动了 ${distance}米`)
+    }
+  }
+
+  class Snake extends Animal {
+    constructor(thename:string){
+      console.log(thename)
+      super(thename)
+    }
+    move(distance:number = 5):void{
+      super.move(distance);
+    }
+  }
+
+__派生类包含了一个构造函数，它必须调用super()，它会执行基类的构造函数。 而且，在构造函数里访问this的属性之前，我们一定要调用super()。 这个是TypeScript强制执行的一条重要规则。__
+
 #### 修饰符
+什么是修饰符？修饰符是用于限定类型以及类型成员的声明的一种符号，修饰符用来定义类、方法或者变量，现在来学习的是访问修饰符，  
+ts中有三种访问修饰符：public，private，protected  
+* public 修饰的属性或方法是公有的，可以在任何地方被访问到，__默认所有的属性和方法都是 public 的__
+* private 修饰的属性或方法是私有的，不能在声明它的类的外部访问
+* protected 修饰的属性或方法是受保护的，它和 private 类似，区别是它在子类中也是允许被访问的
+
+1. public 例子：
+
+  class Animal {
+    public name;
+    constructor(name) {
+      this.name = name;
+    }
+  }
+
+  let a = new Animal('Jack');
+  console.log(a.name); // Jack
+  a.name = 'Tom';
+  console.log(a.name); // Tom
+
+该例子中，name 被设置为了 public，所以直接访问实例的 name 属性是允许的。
+
+2. private 例子：
+
+  class Class_Person {
+    private name:string;
+    constructor(name:string){
+      this.name = name;
+    }
+  }
+  class Class_Male extends Class_Person{
+    constructor(name:string){
+      super(name);
+      console.log(this.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
+    }
+  }
+  let class_a = new Class_Person('Jack');
+  console.log(class_a.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
+
+从上述代码可知：
+1. 虽然在ts文件报错了，但不影响编译成js文件后读取,因为js并没有限制 private 属性在外部的可访问性。
+2. 父类设置了private后，子类访问不到父类的变量。
+
+3. protected 例子
+
+    class Class_Person {
+      protected name:string;
+      constructor(name:string){
+        this.name = name;
+      }
+    }
+    class Class_Male extends Class_Person{
+      constructor(name:string){
+        super(name);
+        console.log(this.name)
+      }
+    }
+    let class_a = new Class_Person('Jack');
+    console.log(class_a.name) 
+
+将父类的name设置为protected，子类就可以访问到父类的属性，不管继承与否，外部不能访问到受proteed的属性。
+
+4. 构造函数的例子
+构造函数也可以使用访问修饰符，只不过不同的修饰符影响不同。
+ * 当构造函数修饰为 private 时，该类不允许被继承或者实例化
+
+  class Class_Person {
+    protected name:string;
+    private constructor(name:string){
+      this.name = name;
+    }
+  }
+  class Class_Male extends Class_Person{ // Cannot extend a class 'Class_Person'. Class constructor is marked as private.ts(2675)
+    constructor(name:string){
+      super(name);
+      console.log(this.name,'111') 
+    }
+  }
+
+  let class_a = new Class_Person('Jack'); // Constructor of class 'Class_Person' is private and only accessible within the class declaration.ts(2673)
+
+  * 当构造函数修饰为 protected 时，该类只允许被继承：
+
+    class Class_Person {
+      protected name:string;
+      protected constructor(name:string){
+        this.name = name;
+      }
+    }
+    class Class_Male extends Class_Person{
+      constructor(name:string){
+        super(name);
+        console.log(this.name,'111')
+      }
+    }
+
+    let class_a = new Class_Person('Jack');// Constructor of class 'Class_Person' is protected and only accessible within the class declaration.ts(2674)
+
+另外还有只读修饰符readonly，readonly将属性设置为只读的。 只读属性必须在声明时或构造函数里被初始化。
+
+  class Class_Animal {
+    readonly type:string;
+    readonly name:string = 'cat';
+    constructor(type?:string){
+      this.type = 'cat';
+    }
+  }
+  let cat = new Class_Animal();
+  cat.name = 'catt' // Cannot assign to 'name' because it is a read-only property.ts(2540)
 
 #### 存取器
 

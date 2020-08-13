@@ -9,16 +9,6 @@ var tom = {
     id: 1111111,
     isMale: false,
 };
-var tiger = {
-    type: 'cat',
-    color: 'yellow'
-};
-var lion = {
-    type: 'dog'
-};
-var shark = {
-    type: 'fish',
-};
 var red_flower = {
     name: 'red_flower',
     color: 'red'
