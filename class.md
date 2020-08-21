@@ -224,16 +224,26 @@ TypeScript支持通过getters/setters来截取对对象成员的访问。 它能
   console.log(a.name); // Jack
 
 #### 静态属性
-使用 static 修饰符修饰的属性和方法称为静态属性和静态方法，它们不需要实例化，而是直接通过类来调用
+使用 static 修饰符修饰的属性和方法称为静态属性和静态方法，它们不需要实例化，实例化后的对象也不能调用静态属性和静态方法，而是直接通过类来调用.  
+__静态属性和静态方法在构造器中不能通过this直接调用，只能用类的方式来调用__
+
   
   class Class_Animal3 {
     static myname:string = 'tome'
+    Myname:string;
+    constructor(Myname:string){
+      this.Myname = Myname
+      console.log(this.myname)// Property 'myname' is a static member of type 'Class_Animal3
+      console.log(Class_Animal3.myname) // ‘tome’
+    }
     static isAnimal(a:any) {
       return a instanceof Animal;
     }
   }
 
-  let class_a = new Animal('Jack');
+  let class_a = new Class_Animal3('Jack');
+  class_a.myname = '1'; // // Property 'myname' is a static member of type 'Class_Animal3
+  Class_Animal3.myname = '2'; // 2
   class_a.isAnimal(class_a); // Property 'isAnimal' does not exist on type 'Animal'.ts(2339)
   Class_Animal3.isAnimal(class_a); // true
   console.log(Class_Animal3.myname) // tome
@@ -241,4 +251,62 @@ TypeScript支持通过getters/setters来截取对对象成员的访问。 它能
   
 #### 抽象类
 
+在面向对象的概念中，所有的对象都是通过类来描绘的，但是反过来，并不是所有的类都是用来描绘对象的，如果一个类中没有包含足够的信息来描绘一个具体的对象，这样的类就是抽象类。  
+抽象类除了不能实例化对象之外，类的其它功能依然存在，成员变量、成员方法和构造方法的访问方式和普通类一样。
+
+由于抽象类不能实例化对象，所以抽象类必须被继承，才能被使用。（抽象类做为其它派生类的基类使用。 它们一般不会直接被实例化。 不同于接口，抽象类可以包含成员的实现细节。）
+
+abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法。
+
+  abstract class Abstract_Person{
+    name:string;
+    constructor(name:string) {
+      this.name = name;
+    }
+    abstract sayHi():void;
+  }
+  let abstract_peter = new Abstract_Person('peter') // 无法创建抽象类的实例
+* 在上述例子中，定义了一个抽象类Abstract_Person，并且定义了一个抽象方法sayHi。在实例化抽象类的时候报错了。抽象类不能用于实例化，只有继承才能使用
+* 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。 抽象方法的语法与接口方法相似。 两者都是定义方法签名但不包含方法体。 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符。
+
+  class Abstract_Child extends Abstract_Person{
+    age:number;
+    constructor(name:string,age:number = 10){
+      super(name) // 在派生类的构造函数中必须调用 super()
+      this.name = name
+      this.age = age;
+    }
+    sayHi(){ // 父类定义的抽象方法必须在子类实现
+      console.log(`${this.age}岁的${this.name}说你好`)
+    }
+  }
+  let abstract_tom = new Abstract_Child('tom',18);
+  abstract_tom.sayHi(); //18岁的tom说你好
+
 #### 类与接口
+
+类定义会创建两个东西：类的实例类型和一个构造函数
+
+  class Greeter {
+    static standardGreeting = "Hello, there";
+    greeting: string;
+    constructor(message?:string){
+      this.greeting = message
+    }
+    greet() {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeter.standardGreeting;
+        }
+    }
+  }
+
+  let greeter1: Greeter; // 意思是 Greeter类的实例的类型是 Greeter
+  greeter1 = new Greeter("world");
+  console.log(greeter1.greet()); // Hello, world
+  let greeterMaker: typeof Greeter = Greeter; // 取Greeter类的类型，而不是实例的类型。 或者更确切的说，"告诉我 Greeter标识符的类型"，也就是构造函数的类型。 这个类型包含了类的所有静态成员和构造函数
+  greeterMaker.standardGreeting = "Hey there!";
+  let greeter2 = new greeterMaker()
+  console.log(greeter2.greet()) //Hey there!

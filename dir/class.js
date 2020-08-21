@@ -102,10 +102,10 @@ var Class_Animal2 = (function () {
     return Class_Animal2;
 }());
 var class_tom = new Class_Animal2();
-console.log(class_tom);
 var Class_Animal3 = (function () {
-    function Class_Animal3(myname) {
-        this.myname = myname;
+    function Class_Animal3(Myname) {
+        this.Myname = Myname;
+        console.log(Class_Animal3.myname);
     }
     Class_Animal3.isAnimal = function (a) {
         return a instanceof Animal;
@@ -120,6 +120,52 @@ var Son_Animal3 = (function (_super) {
     }
     return Son_Animal3;
 }(Class_Animal3));
-var class_a = new Animal('Jack');
+var class_a = new Class_Animal3('Jack');
+Class_Animal3.myname = '2';
 Class_Animal3.isAnimal(class_a);
+console.log(Class_Animal3.myname);
+var Abstract_Person = (function () {
+    function Abstract_Person(name) {
+        this.name = name;
+    }
+    return Abstract_Person;
+}());
+var Abstract_Child = (function (_super) {
+    __extends(Abstract_Child, _super);
+    function Abstract_Child(name, age) {
+        if (age === void 0) { age = 10; }
+        var _this = _super.call(this, name) || this;
+        _this.name = name;
+        _this.age = age;
+        return _this;
+    }
+    Abstract_Child.prototype.sayHi = function () {
+        console.log(this.age + "\u5C81\u7684" + this.name + "\u8BF4\u4F60\u597D");
+    };
+    return Abstract_Child;
+}(Abstract_Person));
+var abstract_tom = new Abstract_Child('tom', 18);
+abstract_tom.sayHi();
+var Greeter = (function () {
+    function Greeter(message) {
+        this.greeting = message;
+    }
+    Greeter.prototype.greet = function () {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeter.standardGreeting;
+        }
+    };
+    Greeter.standardGreeting = "Hello, there";
+    return Greeter;
+}());
+var greeter1;
+greeter1 = new Greeter("world");
+console.log(greeter1.greet());
+var greeterMaker = Greeter;
+greeterMaker.standardGreeting = "Hey there!";
+var greeter2 = new greeterMaker();
+console.log(greeter2.greet());
 //# sourceMappingURL=class.js.map

@@ -45,10 +45,31 @@ declare class Class_Animal2 {
 declare let class_tom: Class_Animal2;
 declare class Class_Animal3 {
     static myname: string;
-    constructor(myname: string);
+    Myname: string;
+    constructor(Myname: string);
     static isAnimal(a: any): boolean;
 }
 declare class Son_Animal3 extends Class_Animal3 {
     constructor(name: string);
 }
-declare let class_a: Animal;
+declare let class_a: Class_Animal3;
+declare abstract class Abstract_Person {
+    name: string;
+    constructor(name: string);
+    abstract sayHi(): void;
+}
+declare class Abstract_Child extends Abstract_Person {
+    age: number;
+    constructor(name: string, age?: number);
+    sayHi(): void;
+}
+declare let abstract_tom: Abstract_Child;
+declare class Greeter {
+    static standardGreeting: string;
+    greeting: string;
+    constructor(message?: string);
+    greet(): string;
+}
+declare let greeter1: Greeter;
+declare let greeterMaker: typeof Greeter;
+declare let greeter2: Greeter;
