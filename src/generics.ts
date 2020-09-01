@@ -65,4 +65,4 @@ gm1.add(5);
 gm1.add(3);
 gm1.add(2);
 gm1.add(9);
-console.log(gm1.min()); //
+console.log(gm1.min()); //2
