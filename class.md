@@ -17,33 +17,33 @@ TypeScript 除了实现了所有 ES6 中的类的功能以外，还添加了一�
 
 #### 类的基本实现
 
-js的实现方式
+##### js的实现方式
 
-  class Person{
-    constructor(name,age){
-      this.name = name;
-      this.age = age;
+    class Person{
+      constructor(name,age){
+        this.name = name;
+        this.age = age;
+      }
+      say(){
+        alert(this.name)
+      }
     }
-    say(){
-      alert(this.name)
-    }
-  }
-  var peter = new Person('peter',25);
+    var peter = new Person('peter',25);
 
-ts的实现方式
+##### ts的实现方式
 
-  class Person_Class{
-    name:string;
-    age:number;
-    constructor(name:string,age:number){
-      this.name = name;
-      this.age = age;
+    class Person_Class{
+      name:string;
+      age:number;
+      constructor(name:string,age:number){
+        this.name = name;
+        this.age = age;
+      }
+      say(){
+        alert(this.name)
+      }
     }
-    say(){
-      alert(this.name)
-    }
-  }
-  var peter_class = new Person_Class('peter',25); 
+    var peter_class = new Person_Class('peter',25); 
 
 #### 类的定义及说明
 
@@ -55,25 +55,25 @@ ts的实现方式
 js中class 使用 extends 关键字实现继承，子类中使用 super 关键字来调用父类的构造函数和方法。
 在ts中，和js的操作方式一样
 
-  class Animal {
-    name:string;
-    constructor(thename:string){
-      this.name = thename;
+    class Animal {
+      name:string;
+      constructor(thename:string){
+        this.name = thename;
+      }
+      move(distance:number):void{
+        console.log(`${this.name} 移动了 ${distance}米`)
+      }
     }
-    move(distance:number):void{
-      console.log(`${this.name} 移动了 ${distance}米`)
-    }
-  }
 
-  class Snake extends Animal {
-    constructor(thename:string){
-      console.log(thename)
-      super(thename)
+    class Snake extends Animal {
+      constructor(thename:string){
+        console.log(thename)
+        super(thename)
+      }
+      move(distance:number = 5):void{
+        super.move(distance);
+      }
     }
-    move(distance:number = 5):void{
-      super.move(distance);
-    }
-  }
 
 __派生类包含了一个构造函数，它必须调用super()，它会执行基类的构造函数。 而且，在构造函数里访问this的属性之前，我们一定要调用super()。 这个是TypeScript强制执行的一条重要规则。__
 
@@ -84,44 +84,44 @@ ts中有三种访问修饰符：public，private，protected
 * private 修饰的属性或方法是私有的，不能在声明它的类的外部访问
 * protected 修饰的属性或方法是受保护的，它和 private 类似，区别是它在子类中也是允许被访问的
 
-1. public 例子：
+##### 1. public 例子：
 
-  class Animal {
-    public name;
-    constructor(name) {
-      this.name = name;
+    class Animal {
+      public name;
+      constructor(name) {
+        this.name = name;
+      }
     }
-  }
 
-  let a = new Animal('Jack');
-  console.log(a.name); // Jack
-  a.name = 'Tom';
-  console.log(a.name); // Tom
+    let a = new Animal('Jack');
+    console.log(a.name); // Jack
+    a.name = 'Tom';
+    console.log(a.name); // Tom
 
 该例子中，name 被设置为了 public，所以直接访问实例的 name 属性是允许的。
 
-2. private 例子：
+##### 2. private 例子：
 
-  class Class_Person {
-    private name:string;
-    constructor(name:string){
-      this.name = name;
+    class Class_Person {
+      private name:string;
+      constructor(name:string){
+        this.name = name;
+      }
     }
-  }
-  class Class_Male extends Class_Person{
-    constructor(name:string){
-      super(name);
-      console.log(this.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
+    class Class_Male extends Class_Person{
+      constructor(name:string){
+        super(name);
+        console.log(this.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
+      }
     }
-  }
-  let class_a = new Class_Person('Jack');
-  console.log(class_a.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
+    let class_a = new Class_Person('Jack');
+    console.log(class_a.name) // Property 'name' is private and only accessible within class 'Class_Person'.ts(2341)
 
 从上述代码可知：
 1. 虽然在ts文件报错了，但不影响编译成js文件后读取,因为js并没有限制 private 属性在外部的可访问性。
 2. 父类设置了private后，子类访问不到父类的变量。
 
-3. protected 例子
+###### 3. protected 例子
 
     class Class_Person {
       protected name:string;
@@ -140,113 +140,113 @@ ts中有三种访问修饰符：public，private，protected
 
 将父类的name设置为protected，子类就可以访问到父类的属性，不管继承与否，外部不能访问到受proteed的属性。
 
-4. 构造函数的例子
+##### 4. 构造函数的例子
 构造函数也可以使用访问修饰符，只不过不同的修饰符影响不同。
  * 当构造函数修饰为 private 时，该类不允许被继承或者实例化
 
-  class Class_Person {
-    protected name:string;
-    private constructor(name:string){
-      this.name = name;
-    }
-  }
-  class Class_Male extends Class_Person{ // Cannot extend a class 'Class_Person'. Class constructor is marked as private.ts(2675)
-    constructor(name:string){
-      super(name);
-      console.log(this.name,'111') 
-    }
-  }
+        class Class_Person {
+          protected name:string;
+          private constructor(name:string){
+            this.name = name;
+          }
+        }
+        class Class_Male extends Class_Person{ // Cannot extend a class 'Class_Person'. Class constructor is marked as private.ts(2675)
+          constructor(name:string){
+            super(name);
+            console.log(this.name,'111') 
+          }
+        }
 
-  let class_a = new Class_Person('Jack'); // Constructor of class 'Class_Person' is private and only accessible within the class declaration.ts(2673)
+        let class_a = new Class_Person('Jack'); // Constructor of class 'Class_Person' is private and only accessible within the class declaration.ts(2673)
 
   * 当构造函数修饰为 protected 时，该类只允许被继承：
 
-    class Class_Person {
-      protected name:string;
-      protected constructor(name:string){
-        this.name = name;
-      }
-    }
-    class Class_Male extends Class_Person{
-      constructor(name:string){
-        super(name);
-        console.log(this.name,'111')
-      }
-    }
+        class Class_Person {
+          protected name:string;
+          protected constructor(name:string){
+            this.name = name;
+          }
+        }
+        class Class_Male extends Class_Person{
+          constructor(name:string){
+            super(name);
+            console.log(this.name,'111')
+          }
+        }
 
-    let class_a = new Class_Person('Jack');// Constructor of class 'Class_Person' is protected and only accessible within the class declaration.ts(2674)
+        let class_a = new Class_Person('Jack');// Constructor of class 'Class_Person' is protected and only accessible within the class declaration.ts(2674)
 
 另外还有只读修饰符readonly，readonly将属性设置为只读的。 只读属性必须在声明时或构造函数里被初始化。
 
-  class Class_Animal {
-    readonly type:string;
-    readonly name:string = 'cat';
-    constructor(type?:string){
-      this.type = 'cat';
+    class Class_Animal {
+      readonly type:string;
+      readonly name:string = 'cat';
+      constructor(type?:string){
+        this.type = 'cat';
+      }
     }
-  }
-  let cat = new Class_Animal();
-  cat.name = 'catt' // Cannot assign to 'name' because it is a read-only property.ts(2540)
+    let cat = new Class_Animal();
+    cat.name = 'catt' // Cannot assign to 'name' because it is a read-only property.ts(2540)
 
 __注意如果 readonly 和其他访问修饰符同时存在的话，需要写在其后面。__
 
-参数属性
+#### 参数属性
 修饰符和readonly还可以使用在构造函数参数中，等同于类中定义该属性同时给该属性赋值，使代码更简洁。通俗的说，把声明和赋值合并为一处
 
-  class Class_Animal1{
-    constructor(private name:string = 'peter'){}
-  }
-  // 等价于
-  class Class_Animal2{
-    private name:string;
-    constructor(name:string = 'tom'){
-      this.name = name
+    class Class_Animal1{
+      constructor(private name:string = 'peter'){}
     }
-  }
+    // 等价于
+    class Class_Animal2{
+      private name:string;
+      constructor(name:string = 'tom'){
+        this.name = name
+      }
+    }
 
 #### 存取器
 TypeScript支持通过getters/setters来截取对对象成员的访问。 它能帮助你有效的控制对对象成员的访问。
 
-  class Animal {
-    constructor(name) {
-      this.name = name;
+    class Animal {
+      constructor(name) {
+        this.name = name;
+      }
+      get name() {
+        return 'Jack';
+      }
+      set name(value) {
+        console.log('setter: ' + value);
+      }
     }
-    get name() {
-      return 'Jack';
-    }
-    set name(value) {
-      console.log('setter: ' + value);
-    }
-  }
 
-  let a = new Animal('Kitty'); // setter: Kitty
-  a.name = 'Tom'; // setter: Tom
-  console.log(a.name); // Jack
+    let a = new Animal('Kitty'); // setter: Kitty
+    a.name = 'Tom'; // setter: Tom
+    console.log(a.name); // Jack
 
 #### 静态属性
 使用 static 修饰符修饰的属性和方法称为静态属性和静态方法，它们不需要实例化，实例化后的对象也不能调用静态属性和静态方法，而是直接通过类来调用.  
 __静态属性和静态方法在构造器中不能通过this直接调用，只能用类的方式来调用__
 
   
-  class Class_Animal3 {
-    static myname:string = 'tome'
-    Myname:string;
-    constructor(Myname:string){
-      this.Myname = Myname
-      console.log(this.myname)// Property 'myname' is a static member of type 'Class_Animal3
-      console.log(Class_Animal3.myname) // ‘tome’
+    class Class_Animal3 {
+      static myname:string = 'tome'
+      Myname:string;
+      constructor(Myname:string){
+        this.Myname = Myname
+        console.log(this.myname)// Property 'myname' is a static member of type 'Class_Animal3
+        console.log(Class_Animal3.myname) // ‘tome’
+      }
+      static isAnimal(a:any) {
+        return a instanceof Animal;
+      }
     }
-    static isAnimal(a:any) {
-      return a instanceof Animal;
-    }
-  }
 
-  let class_a = new Class_Animal3('Jack');
-  class_a.myname = '1'; // // Property 'myname' is a static member of type 'Class_Animal3
-  Class_Animal3.myname = '2'; // 2
-  class_a.isAnimal(class_a); // Property 'isAnimal' does not exist on type 'Animal'.ts(2339)
-  Class_Animal3.isAnimal(class_a); // true
-  console.log(Class_Animal3.myname) // tome
+    let class_a = new Class_Animal3('Jack');
+    class_a.myname = '1'; // // Property 'myname' is a static member of type 'Class_Animal3
+    Class_Animal3.myname = '2'; // 2
+    class_a.isAnimal(class_a); // Property 'isAnimal' does not exist on type 'Animal'.ts(2339)
+    Class_Animal3.isAnimal(class_a); // true
+    console.log(Class_Animal3.myname) // tome
 
   
 #### 抽象类
@@ -258,55 +258,55 @@ __静态属性和静态方法在构造器中不能通过this直接调用，只�
 
 abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法。
 
-  abstract class Abstract_Person{
-    name:string;
-    constructor(name:string) {
-      this.name = name;
+    abstract class Abstract_Person{
+      name:string;
+      constructor(name:string) {
+        this.name = name;
+      }
+      abstract sayHi():void;
     }
-    abstract sayHi():void;
-  }
-  let abstract_peter = new Abstract_Person('peter') // 无法创建抽象类的实例
+    let abstract_peter = new Abstract_Person('peter') // 无法创建抽象类的实例
 * 在上述例子中，定义了一个抽象类Abstract_Person，并且定义了一个抽象方法sayHi。在实例化抽象类的时候报错了。抽象类不能用于实例化，只有继承才能使用
 * 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。 抽象方法的语法与接口方法相似。 两者都是定义方法签名但不包含方法体。 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符。
 
-  class Abstract_Child extends Abstract_Person{
-    age:number;
-    constructor(name:string,age:number = 10){
-      super(name) // 在派生类的构造函数中必须调用 super()
-      this.name = name
-      this.age = age;
+    class Abstract_Child extends Abstract_Person{
+      age:number;
+      constructor(name:string,age:number = 10){
+        super(name) // 在派生类的构造函数中必须调用 super()
+        this.name = name
+        this.age = age;
+      }
+      sayHi(){ // 父类定义的抽象方法必须在子类实现
+        console.log(`${this.age}岁的${this.name}说你好`)
+      }
     }
-    sayHi(){ // 父类定义的抽象方法必须在子类实现
-      console.log(`${this.age}岁的${this.name}说你好`)
-    }
-  }
-  let abstract_tom = new Abstract_Child('tom',18);
-  abstract_tom.sayHi(); //18岁的tom说你好
+    let abstract_tom = new Abstract_Child('tom',18);
+    abstract_tom.sayHi(); //18岁的tom说你好
 
 #### 类与接口
 
 类定义会创建两个东西：类的实例类型和一个构造函数
 
-  class Greeter {
-    static standardGreeting = "Hello, there";
-    greeting: string;
-    constructor(message?:string){
-      this.greeting = message
+    class Greeter {
+      static standardGreeting = "Hello, there";
+      greeting: string;
+      constructor(message?:string){
+        this.greeting = message
+      }
+      greet() {
+          if (this.greeting) {
+              return "Hello, " + this.greeting;
+          }
+          else {
+              return Greeter.standardGreeting;
+          }
+      }
     }
-    greet() {
-        if (this.greeting) {
-            return "Hello, " + this.greeting;
-        }
-        else {
-            return Greeter.standardGreeting;
-        }
-    }
-  }
 
-  let greeter1: Greeter; // 意思是 Greeter类的实例的类型是 Greeter
-  greeter1 = new Greeter("world");
-  console.log(greeter1.greet()); // Hello, world
-  let greeterMaker: typeof Greeter = Greeter; // 取Greeter类的类型，而不是实例的类型。 或者更确切的说，"告诉我 Greeter标识符的类型"，也就是构造函数的类型。 这个类型包含了类的所有静态成员和构造函数
-  greeterMaker.standardGreeting = "Hey there!";
-  let greeter2 = new greeterMaker()
-  console.log(greeter2.greet()) //Hey there!
+    let greeter1: Greeter; // 意思是 Greeter类的实例的类型是 Greeter
+    greeter1 = new Greeter("world");
+    console.log(greeter1.greet()); // Hello, world
+    let greeterMaker: typeof Greeter = Greeter; // 取Greeter类的类型，而不是实例的类型。 或者更确切的说，"告诉我 Greeter标识符的类型"，也就是构造函数的类型。 这个类型包含了类的所有静态成员和构造函数
+    greeterMaker.standardGreeting = "Hey there!";
+    let greeter2 = new greeterMaker()
+    console.log(greeter2.greet()) //Hey there!

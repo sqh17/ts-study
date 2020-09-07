@@ -54,4 +54,17 @@ function reverse(x) {
         return x.split('').reverse().join('');
     }
 }
+function bar_function() {
+    console.log(this);
+}
+var Bar = (function () {
+    function Bar(Name) {
+        if (Name === void 0) { Name = '10'; }
+        this.name = Name;
+    }
+    Bar.prototype.bar_function1 = function () {
+        console.log(this.name);
+    };
+    return Bar;
+}());
 //# sourceMappingURL=function.js.map

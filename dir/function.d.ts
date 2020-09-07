@@ -13,10 +13,16 @@ interface Card {
 interface Deck {
     suits: string[];
     cards: number[];
-    createCardPicker(this: any): () => Card;
+    createCardPicker(): () => Card;
 }
 declare let deck: Deck;
 declare let cardPicker: () => Card;
 declare let pickedCard: Card;
 declare function reverse(x: number): number;
 declare function reverse(x: string): string;
+declare function bar_function(this: any): void;
+declare class Bar {
+    private name;
+    constructor(Name?: string);
+    bar_function1(this: Bar): void;
+}

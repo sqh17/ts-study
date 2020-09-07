@@ -35,13 +35,13 @@ interface Card {
 interface Deck {
   suits: string[];
   cards: number[];
-  createCardPicker(this: any): () => Card;
+  createCardPicker(): () => Card;
 }
 let deck: Deck = {
   suits: ["hearts", "spades", "clubs", "diamonds"],
   cards: Array(52),
   // NOTE: The function now explicitly specifies that its callee must be of type Deck
-  createCardPicker: function(this: any) {
+  createCardPicker: function() {
       return () => {
           let pickedCard = Math.floor(Math.random() * 52);
           let pickedSuit = Math.floor(pickedCard / 13);
@@ -63,5 +63,18 @@ function reverse(x: any): any{
       return Number(x.toString().split('').reverse().join(''));
   } else if (typeof x === 'string') {
       return x.split('').reverse().join('');
+  }
+}
+
+function bar_function(this:any):void{
+  console.log(this)
+}
+class Bar {
+  private name:string;
+  constructor(Name:string = '10'){
+    this.name = Name;
+  }
+  bar_function1(this:Bar){
+    console.log(this.name)
   }
 }
