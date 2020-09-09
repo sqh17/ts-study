@@ -31,7 +31,7 @@ __当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时
     fun1():void
   }
   interface myInter2 {
-    fun2?():void
+    fun2():void
   }
 
   // 此时定义的jcType是myInter1和myInter2的交叉类型，其中必须包含这两个接口中定义的属性
@@ -109,7 +109,7 @@ __当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时
     }else {
       pet.run();
     }
-  __谓词为 parameterName is Type这种形式， parameterName__
+  __谓词为 parameterName is Type这种形式， parameterName必须是来自于当前函数签名里的一个参数名。__
 
   * typeof类型保护
   就是js中那种判断基本类型一样的方式。
