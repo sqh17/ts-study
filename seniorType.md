@@ -340,3 +340,19 @@ __当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时
   //   isMan?: boolean;
   // }
 
+#### 条件类型
+TypeScript 在2.8版本之后引入了条件类型(conditional type)
+条件类型够表示非统一的类型,以一个条件表达式进行类型关系检测，从而在两种类型中选择其一
+`T extends U ? X : Y`
+若 T 能够赋值给 U，那么类型是 X，否则为 Y,有点类似于JavaScript中的三元条件运算符.
+
+  declare function senior_f<T extends boolean>(x: T): T extends true ? string : number;
+
+  const senior_x = senior_f(Math.random() < 0.5) // const senior_x: string | number
+  const senior_y = senior_f(false) // const senior_x: number
+  const senior_z = senior_f(true) //const senior_x: string
+
+#### 条件类型与联合类型
+条件类型有一个特性,就是「分布式有条件类型」,但是分布式有条件类型是有前提的,条件类型里待检查的类型必须是naked type parameter(指的是裸类型参数,怎么理解?这个「裸」是指类型参数没有被包装在其他类型里,比如没有被数组、元组、函数、Promise等等包裹).
+分布式有条件类型在实例化时会自动分发成联合类型
+#### 条件类型与映射类型

@@ -165,7 +165,7 @@ interface _Map<T> {
   [key: string]: T;
 }
 let keys: keyof _Map<number>; //string
-// let value: _Map<number>['antzone']; //number
+let value: _Map<number>['antzone']; //number
 
 class Images {
   public src: string = 'https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
@@ -176,3 +176,22 @@ class Images {
 type propsNames = keyof Images
 
 type propsType = Images[propsNames]
+
+class senior_User{
+  name:string;
+  age:number;
+  isMan:boolean
+}
+type partial<T> = { [K in keyof T]?: T[K] }
+type partialUser = partial<senior_User> 
+// type partialUser = {
+//   name?: string;
+//   age?: number;
+//   isMan?: boolean;
+// }
+
+declare function senior_f<T extends boolean>(x: T): T extends true ? string : number;
+
+const senior_x = senior_f(Math.random() < 0.5) // const senior_x: string | number
+const senior_y = senior_f(false) // const senior_x: number
+const senior_z = senior_f(true) //const senior_x: string
