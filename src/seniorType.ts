@@ -148,3 +148,31 @@ let generateSQL1 = new TQuery('table_name')
   .getUpdateSql('key4', 'value4');
 
 console.log(generateSQL1); // UPDATE table_name SET key4=value4 WHERE key1=value1 OR key2=value2 AND key3 IN (value3)
+
+interface senior_Person {
+  name: string;
+  age: number;
+}
+let personProps: keyof senior_Person;
+
+interface Itest{
+  webName:string;
+  age:number;
+  address:string
+}
+type ant=keyof Itest;
+interface _Map<T> {
+  [key: string]: T;
+}
+let keys: keyof _Map<number>; //string
+// let value: _Map<number>['antzone']; //number
+
+class Images {
+  public src: string = 'https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+  public alt: string = '谷歌'
+  public width: number = 500
+}
+
+type propsNames = keyof Images
+
+type propsType = Images[propsNames]

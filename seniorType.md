@@ -286,3 +286,57 @@ __当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时
     .getUpdateSql('key4', 'value4');
 
   console.log(generateSQL1); // UPDATE table_name SET key4=value4 WHERE key1=value1 OR key2=value2 AND key3 IN (value3)
+
+  #### 索引类型查询操作符与索引访问操作符
+  keyof索引类型查询操作符是 获取操作数的可访问索引字符串字面量类型
+  假设T是一个类型，那么keyof T产生的类型是T的属性名称字符串字面量类型构成的联合类型。  
+  特别说明:T是数据类型，并非数据本身。
+
+    interface Itest{
+      webName:string;
+      age:number;
+      address:string
+    }
+    type ant=keyof Itest; // 等价于 type ant = "webName" | "age" | "address"
+
+  如果T是一个带有字符串索引签名的类型，那么keyof T是string类型，并且T[string]为索引签名的类型，这就是索引访问操作符
+
+    interface Map<T> {
+      [key: string]: T;
+    }
+    let keys: keyof Map<number>; //string
+    let value: Map<number>['antzone']; //number
+
+    class Images {
+      public src: string = 'https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+      public alt: string = '谷歌'
+      public width: number = 500
+    }
+
+    type propsNames = keyof Images //  等价于type propsNames = "src" | "alt" | "width"
+
+    type propsType = Images[propsNames] // 等价于type propsType = string | number
+
+#### 映射类型
+一个场景：有一个User接口，现在有一个需求是把User接口中的成员全部变成可选的，我们应该怎么做？难道要重新一个个:前面加上?,有没有更便捷的方法？  
+映射类型就派上用场了，映射类型的语法是[K in Keys]
+* K：类型变量，依次绑定到每个属性上，对应每个属性名的类型
+* Keys：字符串字面量构成的联合类型，表示一组属性名（的类型）
+
+首先，我们得找到Keys，即字符串字面量构成的联合类型，假设我们传入的类型是泛型T，得到keyof T，即传入类型T的属性名的联合类型。
+
+然后我们需要将keyof T的属性名称一一映射出来[K in keyof T]，如果我们要把所有的属性成员变为可选类型，那么需要T[K]取出相应的属性值，最后我们重新生成一个可选的新类型{ [K in keyof T]?: T[K] }。
+  
+  class senior_User{
+    name:string;
+    age:number;
+    isMan:boolean
+  }
+  type partial<T> = { [K in keyof T]?: T[K] }
+  type partialUser = partial<senior_User> 
+  // type partialUser = {
+  //   name?: string;
+  //   age?: number;
+  //   isMan?: boolean;
+  // }
+
