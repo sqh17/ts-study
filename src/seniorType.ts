@@ -195,3 +195,39 @@ declare function senior_f<T extends boolean>(x: T): T extends true ? string : nu
 const senior_x = senior_f(Math.random() < 0.5) // const senior_x: string | number
 const senior_y = senior_f(false) // const senior_x: number
 const senior_z = senior_f(true) //const senior_x: string
+
+// 裸类型参数,没有被任何其他类型包裹即T
+type NakedUsage<T> = T extends boolean ? "YES" : "NO"
+// 类型参数被包裹的在元组内即[T]
+type WrappedUsage<T> = [T] extends [boolean] ? "YES" : "NO";
+
+type Distributed = NakedUsage<number | boolean> //  = NakedUsage<number> | NakedUsage<boolean> =  "NO" | "YES"
+type NotDistributed = WrappedUsage<number | boolean > // "NO"
+
+
+type Diff<T, U> = T extends U ? never : T;
+type R = Diff<"a" | "b" | "c" | "d", "a" | "c" | "f">;  // "b" | "d"
+
+interface Part {
+  id: number;
+  name: string;
+  subparts: Part[];
+  updatePart(newName: string): void;
+}
+type FunctionPropertyNames< T > = {[k in keyof T] : T[k] extends Function ? k : never}[keyof T]
+type _R = FunctionPropertyNames<Part>; // updatePart
+
+
+interface __People {
+  id: string
+  name: string
+  age?: number
+  from?: string
+}
+// type NullableKeys<T> = {
+//   [K in keyof T]?: K;
+//  };
+type NullableKeys<T> = {
+  [K in keyof T]-?: '' extends T[K] ? 1:2
+ };
+type RRR = NullableKeys<__People> // type R = "age" | "from"

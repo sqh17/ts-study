@@ -355,4 +355,42 @@ TypeScript 在2.8版本之后引入了条件类型(conditional type)
 #### 条件类型与联合类型
 条件类型有一个特性,就是「分布式有条件类型」,但是分布式有条件类型是有前提的,条件类型里待检查的类型必须是naked type parameter(指的是裸类型参数,怎么理解?这个「裸」是指类型参数没有被包装在其他类型里,比如没有被数组、元组、函数、Promise等等包裹).
 分布式有条件类型在实例化时会自动分发成联合类型
+
+  // 裸类型参数,没有被任何其他类型包裹即T
+  type NakedUsage<T> = T extends boolean ? "YES" : "NO"
+  // 类型参数被包裹的在元组内即[T]
+  type WrappedUsage<T> = [T] extends [boolean] ? "YES" : "NO";
+
+  type Distributed = NakedUsage<number | boolean> //  = NakedUsage<number> | NakedUsage<boolean> =  "NO" | "YES"
+  type NotDistributed = WrappedUsage<number | boolean > // "NO"
+
+  //如何设计一个类型工具Diff<T, U>,我们要找出T类型中U不包含的部分
+  type Diff<T, U> = T extends U ? never : T;
+  type R = Diff<"a" | "b" | "c" | "d", "a" | "c" | "f">;  // "b" | "d"
+
 #### 条件类型与映射类型
+`T extends U ? X : Y` + `[K in Keys]`
+
+编写一个工具类型将interface中函数类型的名称取出来
+
+  interface Part {
+      id: number;
+      name: string;
+      subparts: Part[];
+      updatePart(newName: string): void;
+  }
+
+  type R = FunctionPropertyNames<Part>; // updatePart
+
+答案
+
+  type FunctionPropertyNames< T > = {[k in keyof T] : T[k] extends Function ? k : never}[keyof T]
+
+步骤：
+1. 假设把Part代入泛型T,[K in keyof T]相当于遍历整个interface
+2. 这时K相当于interface的key,T[K]相当于interface的value
+3. 接下来,用条件类型验证value的类型,如果是Function那么将value作为新interface的key保留下来,否则为never
+4. 到这里得到了遍历修改后的新interface
+5. 要求是取出老interface Part的key,这个时候再次用[keyof T]作为key依次取出新interface的value,但是由于id name和subparts的value为never就不会返回任何类型了,所以只返回了'updatePart'
+
+__never类型表示不会是任何值,即什么都没有,甚至不是null类型__
