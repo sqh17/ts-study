@@ -269,19 +269,19 @@ abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法
 * 在上述例子中，定义了一个抽象类Abstract_Person，并且定义了一个抽象方法sayHi。在实例化抽象类的时候报错了。抽象类不能用于实例化，只有继承才能使用
 * 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。 抽象方法的语法与接口方法相似。 两者都是定义方法签名但不包含方法体。 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符。
 
-    class Abstract_Child extends Abstract_Person{
-      age:number;
-      constructor(name:string,age:number = 10){
-        super(name) // 在派生类的构造函数中必须调用 super()
-        this.name = name
-        this.age = age;
+      class Abstract_Child extends Abstract_Person{
+        age:number;
+        constructor(name:string,age:number = 10){
+          super(name) // 在派生类的构造函数中必须调用 super()
+          this.name = name
+          this.age = age;
+        }
+        sayHi(){ // 父类定义的抽象方法必须在子类实现
+          console.log(`${this.age}岁的${this.name}说你好`)
+        }
       }
-      sayHi(){ // 父类定义的抽象方法必须在子类实现
-        console.log(`${this.age}岁的${this.name}说你好`)
-      }
-    }
-    let abstract_tom = new Abstract_Child('tom',18);
-    abstract_tom.sayHi(); //18岁的tom说你好
+      let abstract_tom = new Abstract_Child('tom',18);
+      abstract_tom.sayHi(); //18岁的tom说你好
 
 #### 类与接口
 
