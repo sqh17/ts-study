@@ -26,7 +26,7 @@ __声明方式是小写，不是大写__
 	let bool_1:boolean = false;
 	let bool_2:boolean = true;
 
-#### 注意点----
+#### 注意点----111
 很多 TypeScript 的原始类型比如 boolean、number、string等等，在JavaScript中都有类似的关键字 Boolean、Number、String，后者是 JavaScript 的构造函数，比如我们用 Number 用于数字类型转化或者构造 Number 对象用的，而 TypeScript 中的 number 类型仅仅是表示类型，两者完全不同。
 
 #### 四 void 空值
