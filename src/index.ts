@@ -29,8 +29,8 @@ const f:boolean = undefined;
 let u: void;
 // let g: number = u;
 let bool_1:boolean = false;
-const symbol_1:symbol = Symbol(2);
-const symbol_2:symbol = Symbol(2);
+// const symbol_1:symbol = Symbol(2);
+// const symbol_2:symbol = Symbol(2);
 
 // console.log(symbol_1 == symbol_2);
 
@@ -41,6 +41,7 @@ arr.concat(['q','e']);
 // console.log(arr,arr.concat(['q','e']));
 const arrNum :number[] = [1,2,3,4];
 const arrAny :Array<number> = [1,2,3];
+const arrObj :object[] = [{}]
 let arr_1 :[string,number] = ['a',1];
 // let arr_2 :[string,number] = ['a',1,'a'];
 let arr_2 :any[] = [1,2,3,'a','b']

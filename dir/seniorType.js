@@ -108,4 +108,23 @@ var generateSQL1 = new TQuery('table_name')
     .inWhere('key3', 'value3')
     .getUpdateSql('key4', 'value4');
 console.log(generateSQL1);
+var personProps;
+var keys;
+var value;
+var Images = (function () {
+    function Images() {
+        this.src = 'https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png';
+        this.alt = '谷歌';
+        this.width = 500;
+    }
+    return Images;
+}());
+var senior_User = (function () {
+    function senior_User() {
+    }
+    return senior_User;
+}());
+var senior_x = senior_f(Math.random() < 0.5);
+var senior_y = senior_f(false);
+var senior_z = senior_f(true);
 //# sourceMappingURL=seniorType.js.map

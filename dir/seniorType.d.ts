@@ -55,3 +55,65 @@ declare class TQuery extends Query {
 }
 declare let generateSQL: string;
 declare let generateSQL1: string;
+interface senior_Person {
+    name: string;
+    age: number;
+}
+declare let personProps: keyof senior_Person;
+interface Itest {
+    webName: string;
+    age: number;
+    address: string;
+}
+declare type ant = keyof Itest;
+interface _Map<T> {
+    [key: string]: T;
+}
+declare let keys: keyof _Map<number>;
+declare let value: _Map<number>['antzone'];
+declare class Images {
+    src: string;
+    alt: string;
+    width: number;
+}
+declare type propsNames = keyof Images;
+declare type propsType = Images[propsNames];
+declare class senior_User {
+    name: string;
+    age: number;
+    isMan: boolean;
+}
+declare type partial<T> = {
+    [K in keyof T]?: T[K];
+};
+declare type partialUser = partial<senior_User>;
+declare function senior_f<T extends boolean>(x: T): T extends true ? string : number;
+declare const senior_x: string | number;
+declare const senior_y: number;
+declare const senior_z: string;
+declare type NakedUsage<T> = T extends boolean ? "YES" : "NO";
+declare type WrappedUsage<T> = [T] extends [boolean] ? "YES" : "NO";
+declare type Distributed = NakedUsage<number | boolean>;
+declare type NotDistributed = WrappedUsage<number | boolean>;
+declare type Diff<T, U> = T extends U ? never : T;
+declare type R = Diff<"a" | "b" | "c" | "d", "a" | "c" | "f">;
+interface Part {
+    id: number;
+    name: string;
+    subparts: Part[];
+    updatePart(newName: string): void;
+}
+declare type FunctionPropertyNames<T> = {
+    [k in keyof T]: T[k] extends Function ? k : never;
+}[keyof T];
+declare type _R = FunctionPropertyNames<Part>;
+interface __People {
+    id: string;
+    name: string;
+    age?: number;
+    from?: string;
+}
+declare type NullableKeys<T> = {
+    [K in keyof T]-?: '' extends T[K] ? 1 : 2;
+};
+declare type RRR = NullableKeys<__People>;
